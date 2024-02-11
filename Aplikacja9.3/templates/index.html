@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+</head>
+<body>
+    <h1>Book Library</h1>
+
+    <h2>Books</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} - {{ book.description }} <form method="post" action="{{ url_for('delete_book', book_id=book.id) }}"><button type="submit">Delete</button></form></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add a Book</h2>
+    <form method="post" action="{{ url_for('create_book') }}">
+        {{ form.csrf_token }}
+        {{ form.title.label }} {{ form.title }}<br>
+        {{ form.description.label }} {{ form.description }}<br>
+        <button type="submit">Add Book</button>
+    </form>
+</body>
+</html>
