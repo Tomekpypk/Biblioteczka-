@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Details</title>
+</head>
+<body>
+    <h1>Todo Details</h1>
+    <p>Title: {{ todo.title }}</p>
+    <p>Description: {{ todo.description }}</p>
+    <p>Status: {{ "Done" if todo.done else "Not Done" }}</p>
+    <form method="POST" action="/api/v1/todos/{{ todo.id }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Todo">
+    </form>
+    <form method="POST" action="/api/v1/todos/{{ todo.id }}">
+        <input type="hidden" name="_method" value="PUT">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ todo.title }}" required>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="{{ todo.description }}">
+        <label for="done">Done:</label>
+        <input type="checkbox" id="done" name="done" {% if todo.done %}checked{% endif %}>
+        <input type="submit" value="Update Todo">
+    </form>
+</body>
+</html>
